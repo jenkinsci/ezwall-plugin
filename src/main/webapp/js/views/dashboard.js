@@ -26,17 +26,25 @@ define([
 			this.$el.empty();
 			
 			var data = {};
-			
+
 			data.job = this.model.toJSON();
-			
+
 			data.display = {};
 			data.display.buildNumber = Jenkins.config.get('showBuildNumber');
-			
+
 			$.tmpl(this.template, data).appendTo(this.$el);
-			
+
 			this.$el.addClass('job-status-' + this.model.get('status'));
 			this.$el.toggleClass('job-building', this.model.get('building'));
-			
+
+			// BUG: Seems to be caused by toggling the job-building class, making
+			// the job-glow class inaccessible. If we're not building and we have
+			// the job-glow class then remove it.
+            if (false == this.model.get('building') && this.$el.hasClass('job-glow')) {
+                console.log("Removing inaccessible building glow.");
+                this.$el.removeClass('job-glow', false);
+            }
+
 			if (this.model.users && this.model.users.length > 0) {
 				var userView = new Dashboard.UserView({
 					model: this.model.users[0]
