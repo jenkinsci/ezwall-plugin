@@ -40,9 +40,13 @@ define([
 			// BUG: Seems to be caused by toggling the job-building class, making
 			// the job-glow class inaccessible. If we're not building and we have
 			// the job-glow class then remove it.
-            if (false == this.model.get('building') && this.$el.hasClass('job-glow')) {
-                console.log("Removing inaccessible building glow.");
-                this.$el.removeClass('job-glow', false);
+            if (false == this.model.get('building')) {
+                var hasGlowClass = this.$el.hasClass('job-glow') || this.$el.hasClass('job-glow-subtle');
+                if (hasGlowClass == true) {
+                    console.log("Removing inaccessible building glow.");
+                    this.$el.removeClass('job-glow', false);
+                    this.$el.removeClass('job-glow-subtle', false);
+                }
             }
 
 			if (this.model.users && this.model.users.length > 0) {
@@ -64,6 +68,7 @@ define([
 			this.model.on('change', this.render);
 			Jenkins.config.on('change:showUsername', this.render);
 			Jenkins.config.on('change:showGravatar', this.render);
+			Jenkins.config.on('change:subtleMode', this.render);
 		},
 
 		render : function() {
@@ -145,7 +150,17 @@ define([
 		},
 
 		_animation : function() {
-			this.$('.job-building').toggleClass('job-glow');
+		    // Select the correct glow effects.
+		    var effectToHave = 'job-glow';
+            var effectToRemove = 'job-glow-subtle';
+            if (Jenkins.config.get('subtleMode')) {
+                effectToHave = 'job-glow-subtle';
+                effectToRemove = 'job-glow';
+            }
+
+            // Toggle the required one, remove the others.
+            this.$('.job-building').toggleClass(effectToHave);
+            this.$('.job-building').removeClass(effectToRemove);
 		}
 
 	});
