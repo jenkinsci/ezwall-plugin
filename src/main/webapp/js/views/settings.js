@@ -44,6 +44,7 @@ define([
 			this.model.set('showGravatar', this.$('#showGravatar').is(':checked'));
 			this.model.set('showUsername', this.$('#showUsername').is(':checked'));
 			this.model.set('showBuildNumber', this.$('#showBuildNumber').is(':checked'));
+            this.model.set('subtleMode', this.$('#subtleMode').is(':checked'));
 			this.close();
 		},
 

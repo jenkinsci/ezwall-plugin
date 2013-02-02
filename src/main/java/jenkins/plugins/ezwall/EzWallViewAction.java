@@ -98,7 +98,12 @@ public class EzWallViewAction implements Action, Describable<EzWallViewAction> {
 	public boolean getShowBuildNumber() {
 		return getDescriptor().getShowBuildNumber();
 	}
-	
+
+    @Exported
+    public boolean getSubtleMode() {
+        return getDescriptor().getSubtleMode();
+    }
+
 	@Exported
 	public String getVersion() {
 		return getPluginWrapper().getVersion();
@@ -127,6 +132,8 @@ public class EzWallViewAction implements Action, Describable<EzWallViewAction> {
 		private boolean showBuildNumber = false;
 		
 		private boolean showUsername = false;
+
+        private boolean subtleMode = false;
 
 		@Override
 		public String getDisplayName() {
@@ -172,6 +179,13 @@ public class EzWallViewAction implements Action, Describable<EzWallViewAction> {
 			this.showUsername = showUsername;
 		}
 
+        public boolean getSubtleMode() {
+            return subtleMode;
+        }
+
+        public void setSubtleMode(boolean subtleMode) {
+            this.subtleMode = subtleMode;
+        }
 	}
 
 }
