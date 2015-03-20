@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:x="jelly:xml">
+<st:contentType value="text/html;charset=UTF-8" />
+<x:doctype name="html" />
 <html>
 
   <head>
@@ -21,3 +24,4 @@
   </body>
 
 </html>
+</j:jelly>
