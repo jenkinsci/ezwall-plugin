@@ -34,7 +34,7 @@ define([
 
 			$.tmpl(this.template, data).appendTo(this.$el);
 
-			this.$el.addClass('job-status-' + this.model.get('status'));
+			this.$el.removeClass('job-status-ok job-status-ko job-status-instable job-status-glow').addClass('job-status-' + this.model.get('status'));
 			this.$el.toggleClass('job-building', this.model.get('building'));
 
 			// BUG: Seems to be caused by toggling the job-building class, making
