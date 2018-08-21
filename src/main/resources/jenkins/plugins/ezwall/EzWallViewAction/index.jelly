@@ -2,7 +2,10 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:x="jelly:xml">
 <st:contentType value="text/html;charset=UTF-8" />
 
-<j:set var="resourcesURL" value="${app.rootUrl}plugin/ezwall" />
+<j:new var="h" className="hudson.Functions"/>
+${h.initPageVariables(context)}
+
+<j:set var="resourcesURL" value="${resURL}/plugin/ezwall" />
 <x:doctype name="html" />
 <html>
 
